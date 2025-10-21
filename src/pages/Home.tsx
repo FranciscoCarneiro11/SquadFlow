@@ -3,6 +3,7 @@ import Hyperspeed from '../components/HyperSpeed';
 import { hyperspeedPresets } from '../components/hyperspeedPresets';
 import MagicBento from '../components/MagicBento';
 import FeaturedCompetitionsGrid from '../components/FeaturedCompetitionsGrid'; 
+import HighlightsStack from '../components/HighlightsStack';
 
 export default function Home() {
   return (
@@ -69,6 +70,12 @@ export default function Home() {
             particleCount={12}
             glowColor="124, 77, 255"
           />
+        </section>
+        {/* Secção Destaques */}
+       <section
+        >
+          <HighlightsStack />
+          
         </section>
       </div>
     </div>

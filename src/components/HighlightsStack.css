@@ -1,0 +1,88 @@
+/* ——— Container da secção ——— */
+.hf-section { width: 100%; margin: 2rem auto 0.1rem; }
+.hf-header  { max-width: 1100px; margin: 0 auto 0.25rem; padding: 0 1rem; }
+.hf-header .badge { display:inline-block; font-size:.75rem; letter-spacing:.08em; opacity:.85; }
+.hf-header h2 { font-size: clamp(22px, 3.4vw, 36px); font-weight: 800; margin: .35rem 0 .25rem; }
+.hf-header p  { opacity: .85; }
+
+/* ——— Cartões no stack (apenas quando estão dentro desta secção) ——— */
+.hf-scroller .scroll-stack-card {
+  max-width: 1100px;
+  margin-inline: auto;
+  border-radius: 28px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  position: relative;
+}
+
+/* conteúdo real do cartão, com o look “glass + neon edge” */
+.hf-card__inner {
+  position: relative;
+  padding: 2.2rem 2.4rem;
+  border-radius: 28px;
+  color: #fff;
+
+  /* vidro + halo roxo discreto */
+  background:
+    radial-gradient(120% 140% at 10% 0%, rgba(124,77,255,.16) 0%, rgba(10,10,16,.55) 40%, rgba(6,6,10,.62) 100%),
+    rgba(18,18,30,.45);
+  border: 1px solid rgba(150,120,255,.22);
+  backdrop-filter: blur(6px);
+
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.04) inset,
+    0 10px 40px rgba(50,30,120,.25);
+}
+
+
+/* brilho de contorno mais visível (só nas bordas) */
+.hf-card__inner::after {
+  content: "";
+  pointer-events: none;
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 60px rgba(124,77,255,.18), inset 0 0 20px rgba(255,255,255,.04);
+}
+
+/* ——— Tipografia ——— */
+.hf-kicker {
+  display:inline-block;
+  font-size: .8rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  opacity: .9;
+  margin-bottom: .4rem;
+}
+.hf-kicker--match { color: #9fd1ff; }
+.hf-kicker--team { color: #b2ffa3; }
+.hf-kicker--player { color: #ffd29f; }
+.hf-kicker--league { color: #c7b4ff; }
+.hf-kicker--fact { color: #9fe8ff; }
+
+.hf-title { font-size: clamp(1.3rem, 2.6vw, 1.9rem); font-weight: 800; margin: 0 0 .35rem; }
+.hf-meta  { opacity: .9; margin: 0 0 1.25rem; }
+
+/* ——— Ações ——— */
+.hf-actions { display: flex; gap: .8rem; flex-wrap: wrap; }
+.hf-btn {
+  padding: .65rem 1.05rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.07);
+  color: #fff;
+  font-weight: 600;
+}
+.hf-btn:hover { background: rgba(255,255,255,.12); }
+.hf-btn--ghost { background: transparent; }
+
+/* ——— Responsivo ——— */
+@media (max-width: 768px) {
+  .hf-card__inner { padding: 1.6rem; }
+}
+
+/* ——— Acessibilidade: reduzir motion ——— */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-stack-card { transform: none !important; filter: none !important; }
+}
