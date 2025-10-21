@@ -1,0 +1,241 @@
+/* ===== Tokens locais (podes afinar conforme o tema) ===== */
+.fc-section {
+  --card-bg: rgba(12, 12, 20, 0.72);
+  --card-bd: rgba(255,255,255,0.06);
+  --text-dim: rgba(255,255,255,0.65);
+  --glow: 124, 77, 255; /* roxo = igual ao resto do site */
+  --lift: 6px;
+}
+
+/* ===== Header ===== */
+.fc-header { margin-bottom: 12px; }
+.fc-title { font-size: clamp(22px, 1.6vw + 18px, 32px); margin-top: 6px; }
+.fc-sub { opacity: .8; max-width: 60ch; }
+
+/* ===== Grid ===== */
+.fc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+/* ===== Card base ===== */
+.fc-card {
+  --mx: 0; --my: 0; /* atualizadas via JS para micro-parallax */
+  position: relative;
+  border-radius: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-bd);
+  overflow: hidden;
+  transform: translateZ(0); /* reduz blur em transform */
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  will-change: transform;
+}
+
+/* Glow suave (pseudo-elemento) */
+.fc-card::before {
+  content: "";
+  position: absolute; inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(60% 40% at calc(50% + 40px * var(--mx)) calc(0% + 20px + 20px * var(--my)),
+              rgba(var(--glow), .28), transparent 55%);
+  opacity: 0;
+  transition: opacity 180ms ease, transform 180ms ease;
+  pointer-events: none;
+}
+
+/* Link interno */
+.fc-card__link {
+  display: grid;
+  grid-template-rows: 108px auto;
+  align-items: center;
+  text-decoration: none;
+  padding: 16px;
+  height: 100%;
+}
+
+/* Logo / iniciais */
+.fc-card__logo {
+  display:grid; place-items:center;
+  width: 100%; height: 100px;
+  transform: translate3d(calc(var(--mx) * 6px), calc(var(--my) * 6px), 0);
+  transition: transform 180ms ease, filter 180ms ease;
+}
+.fc-card__logo img { max-width: 84px; max-height: 84px; display:block; filter: drop-shadow(0 0 0 transparent); }
+.fc-card__initials {
+  display:grid; place-items:center;
+  width: 68px; height: 68px; border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  font-weight: 700; letter-spacing: .5px;
+}
+
+/* Meta */
+.fc-card__meta { display:flex; flex-direction:column; gap:4px; }
+.fc-card__name { color: #fff; font-weight: 600; }
+.fc-card__region { color: var(--text-dim); font-size: .86rem; }
+
+/* Favoritos */
+.fc-fav {
+  position: absolute; top: 8px; right: 8px;
+  width: 34px; height: 34px; display:grid; place-items:center;
+  border-radius: 999px; border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.25);
+  cursor: pointer;
+  transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+}
+.fc-fav svg { fill: rgba(255,255,255,0.46); }
+.fc-fav:hover { transform: scale(1.06); }
+.fc-fav.is-active { background: rgba(255, 215, 0, 0.18); border-color: rgba(255,215,0,0.55); }
+.fc-fav.is-active svg { fill: #ffd000; }
+
+/* ===== Hover/Lift ===== */
+@media (hover: hover) and (pointer: fine) {
+  .fc-card:hover {
+    transform: translateY(calc(-1 * var(--lift)));
+    border-color: rgba(255,255,255,0.14);
+    box-shadow:
+      0 10px 26px rgba(0,0,0,0.45),
+      0 0 0 1px rgba(255,255,255,0.04) inset;
+  }
+  .fc-card:hover::before { opacity: 1; }
+  .fc-card:hover .fc-card__logo img {
+    filter: drop-shadow(0 6px 16px rgba(var(--glow), .35));
+  }
+}
+
+/* Foco acessível */
+.fc-card :focus-visible { outline: 2px solid #7e7cff; outline-offset: 2px; border-radius: 10px; }
+
+/* Mobile */
+@media (max-width: 520px) {
+  .fc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .fc-card__link { grid-template-rows: 92px auto; padding: 12px; }
+  .fc-card__logo { height: 92px; }
+  .fc-card__logo img { max-width: 72px; max-height: 72px; }
+}
+
+/* Respeita reduzir animações */
+@media (prefers-reduced-motion: reduce) {
+  .fc-card, .fc-card__logo, .fc-card::before, .fc-fav { transition: none !important; }
+}
+
+/* avatar circular igual para todos os logos */
+.fc-avatar {
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+
+/* o logo fica contido dentro do avatar */
+.fc-avatar img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  display: block;
+}
+
+/* === Fundos por logo (avatar) === */
+/* branco: Serie A, Ligue 1, Conference, Liga Portugal */
+.fc-avatar:has(img.logo--seriea),
+.fc-avatar:has(img.logo--ligue1),
+.fc-avatar:has(img.logo--uecl),
+.fc-avatar:has(img.logo--lp) {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);      /* leve contorno para não “colar” ao card */
+}
+
+/* vermelho liga alemã (Bundesliga) */
+.fc-avatar:has(img.logo--bund) {
+  background: #e10600;                      /* vermelho oficial */
+}
+
+/* === Tamanhos por logo (aumentar) === */
+/* Champions: estava pequeno → maior */
+.fc-avatar img.logo--ucl { width: 88%; height: 88%; }
+
+/* Europa League: mais presença */
+.fc-avatar img.logo--uel { width: 86%; height: 86%; }
+
+/* Premier: símbolo comprido → um pouco maior, centrado */
+.fc-avatar img.logo--epl { width: 90%; height: 90%; transform: translateY(-1px); }
+
+/* Serie A / Ligue 1 / Conference / Liga Portugal: ocupar mais área no fundo branco */
+.fc-avatar img.logo--seriea { width: 84%; height: 84%; }
+.fc-avatar img.logo--ligue1 { width: 86%; height: 86%; }
+.fc-avatar img.logo--uecl   { width: 86%; height: 86%; }
+.fc-avatar img.logo--lp     { width: 90%; height: 90%; }  /* pediste maior */
+
+/* Libertadores: aumentar */
+.fc-avatar img.logo--lib { width: 90%; height: 90%; }
+
+/* Bundesliga: o boneco é amplo – sobe um pouco */
+.fc-avatar img.logo--bund { width: 88%; height: 88%; transform: translateY(-1px); }
+
+/* linha do subtítulo + ações à direita */
+.fc-subrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* container do dropdown */
+.fc-actions { position: relative; }
+
+/* botão do dropdown */
+.fc-dd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  cursor: pointer;
+}
+.fc-dd-btn:hover { border-color: rgba(255,255,255,0.22); }
+.fc-dd-btn .chev { transition: transform .15s ease; }
+.fc-dd-btn .chev.up { transform: rotate(180deg); }
+
+/* menu */
+.fc-dd-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  min-width: 160px;
+  background: rgba(10,10,16,0.98);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.45);
+  padding: 6px;
+  z-index: 5;
+  backdrop-filter: blur(6px);
+}
+
+.fc-dd-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: #e6e9ef;
+  font-size: 0.92rem;
+}
+.fc-dd-item:hover { background: rgba(255,255,255,0.06); }
+.fc-dd-item.is-active {
+  background: rgba(124,77,255,0.16);
+  border: 1px solid rgba(124,77,255,0.35);
+}
+
+/* responsivo: empilha quando o espaço é curto */
+@media (max-width: 640px) {
+  .fc-subrow { align-items: flex-start; }
+}
