@@ -22,16 +22,16 @@ export default function Header() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1.6fr 0.9fr 1fr', // 1) Slogan (esq)  2) Logo (meio)  3) Links (dir)
+            gridTemplateColumns: '1.6fr 0.9fr 1fr', // 1) Slogan   2) Logo   3) Links 
             alignItems: 'center',
             padding: '14px 0',
             columnGap: 16,
           }}
         >
-          {/* ESQUERDA: SLOGAN (TrueFocus) */}
+          {/* ESQUERDA: SLOGAN */}
           <div style={{ justifySelf: 'start' }}>
             <TrueFocus 
-            sentence="SDSD Talento"
+            sentence="Sport Mind"
             manualMode={false}
             blurAmount={5}
             borderColor="rgba(124,77,255,.6)"
@@ -40,24 +40,40 @@ export default function Header() {
             />
           </div>
 
-          {/* MEIO: LOGO/NOME */}
+          {/* MEIO: LOGO */}
           <Link to="/" className="flex items-center">
             <img src={logoUrl} alt="SquadFlow logo" className="logo-img" />
           </Link>
 
           {/* DIREITA: LINKS */}
           <nav
+            className="navbar"                    
             style={{
               justifySelf: 'end',
               display: 'flex',
               gap: 18,
               alignItems: 'center',
-              fontSize: 16,       
+              fontSize: 16,
             }}
           >
             <NavLink to="/">Home</NavLink>
             <NavLink to="/teams">Equipas</NavLink>
-            <NavLink to="/competitions">Competições</NavLink>
+
+            <li className="nav-item has-dd">      
+              <a href="/competicoes" className="nav-link">Competições</a>
+              <div className="dd" role="menu" aria-label="Competições">
+                <a className="dd-item" href="/competicoes/liga-portugal">Liga Portugal Betclic</a>
+                <a className="dd-item" href="/competicoes/taca-de-portugal">Taça de Portugal</a>
+                <a className="dd-item" href="/competicoes/champions-league">UEFA Champions League</a>
+                <a className="dd-item" href="/competicoes/europa-league">UEFA Europa League</a>
+                <a className="dd-item" href="/competicoes/premier-league">Premier League</a>
+                <a className="dd-item" href="/competicoes/la-liga">La Liga</a>
+
+                <div className="dd-divider" aria-hidden="true"></div>
+                <a className="dd-item dd-all" href="/competicoes">Ver todas as competições</a>
+              </div>
+            </li>
+
             <NavLink to="/players">Jogadores</NavLink>
             <NavLink to="/about">Sobre</NavLink>
             <NavLink to="/login" className="btn" style={{ fontSize: 15, padding: '10px 16px' }}>

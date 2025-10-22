@@ -34,14 +34,16 @@ const DEFAULT_GLOW_COLOR = '132, 0, 255';
 const MOBILE_BREAKPOINT = 768;
 
 const competitions = [
-  'Liga Portuguesa',
-  'Taça de Portugal',
-  'Champions League',
+  'Liga dos Campeões',
   'Liga Europa',
-  'Supertaça',
-  'Taça da Liga',
-  'Sub-23',
-  'Sub-19',
+  'Premier League',
+  'LaLiga',
+  'Serie A',
+  'Bundesliga',
+  'Ligue 1',
+  'UEFA Conference',
+  'Libertadores',
+  'Liga Portugal'
 ];
 
 const cardData: BentoCardProps[] = [
@@ -600,7 +602,7 @@ const MagicBento: React.FC<BentoProps> = ({
                     items={competitions}
                     showGradients
                     enableArrowNavigation
-                    displayScrollbar={false}
+                    displayScrollbar={true}
                     onItemSelect={(item) => console.log('Selecionado:', item)}
                 />
                 </div>

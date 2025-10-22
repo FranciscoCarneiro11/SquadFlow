@@ -4,11 +4,11 @@ export type Competition = {
   slug: string;
   region: string;
   logo?: string;
-  logoClass?: string;   // 👈 novo
+  logoClass?: string;   
 };
 
 export const FEATURED_COMPETITIONS: Competition[] = [
-  { id: 'ucl',  name: 'Liga dos Campeões', slug: 'uefa-champions-league', region: 'UEFA',
+  { id: 'ucl',  name: 'Liga dos Campeõe', slug: 'uefa-champions-league', region: 'UEFA',
     logo: '/logos/competitions/ucl.png',             logoClass: 'logo--ucl' },
 
   { id: 'uel',  name: 'UEFA Liga Europa', slug: 'uefa-europa-league', region: 'UEFA',

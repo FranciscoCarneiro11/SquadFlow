@@ -4,6 +4,8 @@ import { hyperspeedPresets } from '../components/hyperspeedPresets';
 import MagicBento from '../components/MagicBento';
 import FeaturedCompetitionsGrid from '../components/FeaturedCompetitionsGrid'; 
 import HighlightsStack from '../components/HighlightsStack';
+import CtaBand from "../components/CTABand";
+import Footer from '../components/Footer';
 
 export default function Home() {
   return (
@@ -47,15 +49,12 @@ export default function Home() {
         >
           <div style={{ marginBottom: 16 }}>
             <div className="badge">Funcionalidades</div>
-            <h2
-              className="hero-title"
-              style={{ fontSize: 'clamp(22px,3.4vw,36px)', marginTop: 6 }}
-            >
-              Tudo o que precisas para gerir o teu clube
-            </h2>
-            <p className="hero-sub" style={{ opacity: 0.8 }}>
-              Visão clara, dados em tempo real e uma experiência rápida — sem perder o foco.
-            </p>
+            <section className="hf-section is-highlights">
+              <div className="hf-header">
+                <h2>Analisa e Pesquisa pelo teu clube</h2>
+                <p>Visão clara, dados em tempo real e uma experiência rápida — sem perder o foco.</p>
+              </div>
+            </section>
           </div>
 
           <MagicBento
@@ -76,6 +75,18 @@ export default function Home() {
         >
           <HighlightsStack />
           
+        </section>
+
+        {/* Secção CTA */}
+       <section
+>
+          <CtaBand />
+        </section>
+
+        {/*Footer */}
+       <section
+        >
+          <Footer />
         </section>
       </div>
     </div>

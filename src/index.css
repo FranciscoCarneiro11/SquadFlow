@@ -122,13 +122,152 @@ a.active { text-decoration: underline; text-underline-offset: 4px; }
 .brand { display:flex; align-items:center; gap:10px; }
 
 .logo-img {
-  height: 130px;               
+  height: 170px;               
   filter: brightness(0) invert(1); /* transforma preto → branco */
   object-fit: contain;
   transition: transform 0.3s ease;
+  transform: translateY(8px);
 }
 
 .logo-img:hover {
   transform: scale(1.05);
 }
 
+/* --- Base --- */
+.navbar .nav-item {
+  position: relative;
+}
+
+.navbar .nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+/* --- Dropdown --- */
+.has-dd .dd {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 240px;
+  padding: .5rem;
+  background: rgba(12, 14, 20, 0.98);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  backdrop-filter: blur(6px);
+
+  /* escondido por padrão */
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+  z-index: 40;
+}
+
+/* abre no hover e no focus (acessível com Tab) */
+.has-dd:hover .dd,
+.has-dd:focus-within .dd {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* itens */
+.dd-item {
+  display: block;
+  padding: .55rem .75rem;
+  border-radius: 8px;
+  font-size: .95rem;
+  line-height: 1.2;
+  color: rgba(255,255,255,.9);
+  text-decoration: none;
+  transition: background .15s ease, color .15s ease;
+}
+
+.dd-item:hover,
+.dd-item:focus {
+  background: rgba(255,255,255,.06);
+  color: #fff;
+}
+
+/* separador + CTA "ver todas" */
+.dd-divider {
+  height: 1px;
+  margin: .35rem .5rem;
+  background: rgba(255,255,255,.08);
+  border-radius: 1px;
+}
+
+.dd-all {
+  font-weight: 600;
+}
+/* reset e layout do item dentro do flex */
+.navbar .nav-item {
+  list-style: none;
+  display: inline-block;   /* garante que o width é o do conteúdo */
+}
+.navbar .nav-link::after {
+  content: '▾';
+  font-size: .8em;
+  margin-left: .35rem;
+  opacity: .7;
+  transition: transform .15s ease;
+}
+.has-dd:hover .nav-link::after,
+.has-dd:focus-within .nav-link::after { transform: rotate(180deg); }
+
+/* === Título “Destaques da semana” — gradiente + glow === */
+.is-highlights .hf-header h2 {
+  font-size: clamp(28px, 4.2vw, 56px);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin: 0 0 .5rem;
+
+  /* gradiente no texto */
+  background: linear-gradient(90deg, #ffffff 0%, #a78bfa 40%, #60a5fa 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  /* brilho suave */
+  filter: drop-shadow(0 8px 28px rgba(99,102,241,.18));
+  position: relative;
+
+  /* animação muito suave para dar “vida” */
+  background-size: 200% 100%;
+  animation: titleShine 8s ease-in-out infinite alternate;
+}
+
+@keyframes titleShine {
+  from { background-position: 0% 50%; }
+  to   { background-position: 100% 50%; }
+}
+
+/* Respeitar quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .is-highlights .hf-header h2 { animation: none; background-size: auto; }
+}
+/* === Sublinha luminosa no título === */
+.is-highlights .hf-header h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 38%;                  /* ajusta se quiseres maior/menor */
+  height: 3px;
+  border-radius: 999px;
+
+  background: radial-gradient(60% 120% at 10% 50%, rgba(167,139,250,.9), rgba(96,165,250,.5))
+              ,linear-gradient(90deg, rgba(255,255,255,.9), rgba(255,255,255,0));
+  box-shadow:
+    0 0 14px rgba(99,102,241,.55),
+    0 0 24px rgba(96,165,250,.35);
+  opacity: .95;
+}
+.is-highlights .hf-header p {
+  color: rgba(255,255,255,.88);
+  font-size: clamp(14px, 1.6vw, 18px);
+  max-width: 62ch;
+}

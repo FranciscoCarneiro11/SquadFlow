@@ -18,12 +18,11 @@ const highlights: Highlight[] = [
 
 export default function HighlightsStack() {
   return (
-    <section aria-labelledby="highlights-title" className="hf-section">
-      <header className="hf-header">
-        <div className="badge">Destaques</div>
-        <h2 id="highlights-title">Destaques da semana</h2>
+    <section className="hf-section is-highlights">
+      <div className="hf-header">
+        <h2>Destaques da semana</h2>
         <p>O melhor do futebol — pronto para explorar.</p>
-      </header>
+      </div>
 
       <ScrollStack
         useWindowScroll
@@ -46,7 +45,6 @@ export default function HighlightsStack() {
 
               <div className="hf-actions">
                 <a href={h.href} className="hf-btn">Ver detalhes</a>
-                <button type="button" className="hf-btn hf-btn--ghost">Favorito ⭐</button>
               </div>
             </div>
           </ScrollStackItem>

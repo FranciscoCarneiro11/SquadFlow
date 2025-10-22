@@ -1,6 +1,7 @@
 .scroll-list-container {
   position: relative;
-  width: 500px;
+  width: 100%;  /* ← Em vez de 500px fixo */
+  max-width: 500px;  /* Limite máximo */
 }
 
 .scroll-list {

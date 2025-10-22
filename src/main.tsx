@@ -9,6 +9,7 @@ import About from './pages/About.tsx'
 import Login from './pages/Login.tsx'
 import './index.css'
 import './components/MagicBento.css';
+import Competitions from './pages/Competitions.tsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
           <Route path="teams" element={<Teams />} />
+          <Route path="competitions" element={<Competitions />} />
           <Route path="players" element={<Players />} />
           <Route path="about" element={<About />} />
           <Route path="login" element={<Login />} />
