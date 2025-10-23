@@ -1,11 +1,11 @@
-import Hero from '../components/Hero';
-import Hyperspeed from '../components/HyperSpeed';           
-import { hyperspeedPresets } from '../components/hyperspeedPresets';
-import MagicBento from '../components/MagicBento';
-import FeaturedCompetitionsGrid from '../components/FeaturedCompetitionsGrid'; 
-import HighlightsStack from '../components/HighlightsStack';
-import CtaBand from "../components/CTABand";
-import Footer from '../components/Footer';
+import Hero from '../components/sections/Hero';
+import Hyperspeed from '../components/animations/HyperSpeed';           
+import { hyperspeedPresets } from '../components/animations/hyperspeedPresets';
+import MagicBento from '../components/sections/MagicBento/MagicBento';
+import FeaturedCompetitionsGrid from '../components/sections/FeaturedCompetitionsGrid'; 
+import HighlightsStack from '../components/sections/HighlightsStack/HighlightsStack';
+import CtaBand from "../components/sections/CTABand/CTABand";
+import Footer from '../components/layout/Footer/Footer';
 
 export default function Home() {
   return (

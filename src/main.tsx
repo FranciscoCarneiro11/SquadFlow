@@ -8,7 +8,7 @@ import Players from './pages/Players.tsx'
 import About from './pages/About.tsx'
 import Login from './pages/Login.tsx'
 import './index.css'
-import './components/MagicBento.css';
+import './components/sections/MagicBento/MagicBento.css';
 import Competitions from './pages/Competitions.tsx'
 
 
